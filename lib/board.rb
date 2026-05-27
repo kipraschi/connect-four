@@ -10,4 +10,10 @@ class Board
   def display
     puts @grid.transpose.map { |row| row.join }
   end
+
+  def update(column_index, symbol)
+    column = @grid[column_index]
+    index_of_last_empty_cell = column.rindex(@empty_cell)
+    @grid[column_index][index_of_last_empty_cell] = symbol
+  end
 end
