@@ -18,7 +18,18 @@ class Board
   end
 
   def valid_move?(column_index)
-    return false unless column_index.between?(0, @width - 1)
+    return false unless column_exists?(column_index)
+    space_left_in_column?(column_index)
+  end
+
+  private
+
+  def column_exists?(column_index)
+    column_index.between?(0, @width - 1)
+  end
+
+  def space_left_in_column?(column_index)
     @grid[column_index].any?(@empty_cell)
   end
+
 end
