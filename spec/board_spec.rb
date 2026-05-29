@@ -22,33 +22,33 @@ RSpec.describe Board do
     end
   end
 
-  describe '#invalid_move?' do
+  describe '#valid_move?' do
     let(:grid) {Array.new(7) { Array.new(6) { '◯' } } }
     
     context 'when the column is filled' do
-      it 'returns true' do 
+      it 'returns false' do 
         board.grid[1] = ['◉','◉','◎','◎','◉','◉']
-        expect(board.invalid_move?(1)).to be(true)
+        expect(board.valid_move?(1)).to be(false)
       end
     end
 
     context 'when the column has empty cells' do
-      it 'returns false' do
+      it 'returns true' do
         board.grid[2] = ['◯','◯','◉','◉','◎','◎']
-        expect(board.invalid_move?(2)).to be(false)
+        expect(board.valid_move?(2)).to be(true)
       end
     end
 
     context 'when provided with a valid index' do
-      it 'returns false' do
-        expect(board.invalid_move?(6)).to be(false)
+      it 'returns true' do
+        expect(board.valid_move?(6)).to be(true)
       end
     end
 
     context 'when provided with a non-existant index' do
-      it 'returns true' do
-        expect(board.invalid_move?(8)).to be(true)
-        expect(board.invalid_move?(-2)).to be(true)
+      it 'returns false' do
+        expect(board.valid_move?(8)).to be(false)
+        expect(board.valid_move?(-2)).to be(false)
       end
     end
     
