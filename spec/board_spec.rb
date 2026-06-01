@@ -53,4 +53,41 @@ RSpec.describe Board do
       end
     end
   end
+
+  describe '#four_connected?' do
+    context 'when the grid has four same symbols horizontally' do
+      it 'returns true' do
+        board.grid.each_with_index {|column, index| column[-1] = sym1 if index < 4}
+        expect(board.four_connected?).to be(true)
+      end
+    end
+
+    context 'when the grid has four same symbols vertically' do
+      it 'returns true' do
+        board.grid[3].each_with_index {|row, index| board.grid[3][index] = sym2 if index > 1}
+        expect(board.four_connected?).to be(true)
+      end
+    end
+
+    context 'when the grid has four same symbols on the first diagonal' do
+      it 'returns true' do
+        board.grid.each_with_index do |column, column_index|
+          board.grid[column_index][column_index + 1] = sym1 unless column_index > 3
+        end
+
+        expect(board.four_connected?).to be(true)
+      end
+    end
+
+    context 'when the grid has four same symbols on the second diagonal' do
+      it 'returns true' do
+        board.grid.each_with_index do |column, column_index|
+          offset = 1
+            board.grid[column_index][-column_index - offset] = sym1 unless column_index > 5
+          offset += 1
+        end
+        expect(board.four_connected?).to be(true)
+      end
+    end
+  end
 end
