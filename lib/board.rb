@@ -22,7 +22,49 @@ class Board
     space_left_in_column?(column_index)
   end
 
+  def four_connected?
+    four_vertically? || four_horizontally? || four_diagonally?
+  end
+
   private
+
+  def four_vertically?
+    @grid.each do |column|
+      column.each_with_index do |cell, row_index|
+        next if cell == @empty_cell
+        next if row_index > 2
+        return true if (1..3).all? {|offset| cell == column[row_index + offset]}
+      end
+    end
+    false
+  end
+
+  def four_horizontally?
+    @grid.each_with_index do |column, column_index|
+      break if column_index > 3
+      column.each_with_index do |cell, row_index|
+        next if cell == @empty_cell
+        return true if (1..3).all? { |offset| cell == @grid[column_index + offset][row_index] }
+      end
+    end
+    false
+  end
+
+  def four_diagonally?
+    @grid.each_with_index do |column, column_index|
+      break if column_index > 3
+      column.each_with_index do |cell, row_index|
+        next if cell == @empty_cell
+        if row_index <=2
+          return true if (1..3).all? { |offset| cell == @grid[column_index + offset][row_index + offset] }
+        end
+        if row_index >=3
+          return true if (1..3).all? { |offset| cell == @grid[column_index + offset][row_index - offset] }
+        end
+      end
+    end
+    false
+  end
 
   def column_exists?(column_index)
     column_index.between?(0, @width - 1)
