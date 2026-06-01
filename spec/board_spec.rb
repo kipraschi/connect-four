@@ -8,7 +8,7 @@ RSpec.describe Board do
   describe '#display' do
     context 'when the grid is empty' do
       it 'prints an empty grid to the cli' do
-        empty_board = Array.new(6) {'◯ ◯ ◯ ◯ ◯ ◯ ◯'}
+        empty_board = Array.new(6) {Array.new(7, empty_sym).join(' ')}
         expect(board).to receive(:puts).with(empty_board)
         board.display
       end
@@ -26,8 +26,6 @@ RSpec.describe Board do
   end
 
   describe '#valid_move?' do
-    let(:grid) {Array.new(7) { Array.new(6) { '◯' } } }
-    
     context 'when the column is filled' do
       it 'returns false' do 
         board.grid[1] = [sym1, sym1, sym2, sym2, sym1, sym1]
@@ -55,5 +53,4 @@ RSpec.describe Board do
       end
     end
   end
-
 end
