@@ -74,7 +74,6 @@ RSpec.describe Board do
         board.grid.each_with_index do |column, column_index|
           board.grid[column_index][column_index + 1] = sym1 unless column_index > 3
         end
-
         expect(board.four_connected?).to be(true)
       end
     end
@@ -87,6 +86,57 @@ RSpec.describe Board do
           offset += 1
         end
         expect(board.four_connected?).to be(true)
+      end
+    end
+  end
+
+  describe '#draw?' do
+    let(:symbols) {[sym1, sym2]}
+    context 'when the board is full but there is no winner' do
+      it 'returns true' do
+        draw_grid = [
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1]
+        ]
+        board.instance_variable_set(:@grid, draw_grid)
+        expect(board.draw?).to be(true)
+      end
+    end
+
+    context 'when the board is full and there is a winner' do
+      it 'returns false' do
+        grid_with_winner = [
+          [sym1, sym1, sym1, sym1, sym2, sym2],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1]
+        ]
+        board.instance_variable_set(:@grid, grid_with_winner)
+        expect(board.draw?).to be(false)
+      end
+    end
+
+    context 'when the board is not full' do
+      it 'returns false' do
+        grid_not_full = [
+          [empty_sym, sym1, empty_sym, sym1, empty_sym, sym2],
+          [empty_sym, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1],
+          [sym2, sym2, sym1, sym1, sym2, sym2],
+          [sym1, sym1, sym2, sym2, sym1, sym1]
+        ]
+        board.instance_variable_set(:@grid, grid_not_full)
+        expect(board.draw?).to be(false)
       end
     end
   end
