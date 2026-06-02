@@ -26,7 +26,23 @@ class Board
     four_vertically? || four_horizontally? || four_diagonally?
   end
 
+  def draw?
+    full? && !four_connected?
+  end
+
   private
+  
+  def column_exists?(column_index)
+    column_index.between?(0, @width - 1)
+  end
+
+  def space_left_in_column?(column_index)
+    @grid[column_index].any?(@empty_cell)
+  end
+
+  def full?
+    @grid.none? {|column| column.any?(@empty_cell)}
+  end
 
   def four_vertically?
     @grid.each do |column|
@@ -64,14 +80,6 @@ class Board
       end
     end
     false
-  end
-
-  def column_exists?(column_index)
-    column_index.between?(0, @width - 1)
-  end
-
-  def space_left_in_column?(column_index)
-    @grid[column_index].any?(@empty_cell)
   end
 
 end
