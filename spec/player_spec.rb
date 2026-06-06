@@ -11,6 +11,9 @@ RSpec.describe Player do
     end
 
     context 'when provided with an invalid input' do
+      before do
+        allow(player).to receive(:announce_invalid_input)
+      end
       it 'loops until input is valid' do
         allow(player).to receive(:gets).and_return('a','?','4')
         expect(player).to receive(:gets).exactly(3).times

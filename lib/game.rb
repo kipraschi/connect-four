@@ -73,7 +73,7 @@ class Game
     <<~TEXT
 
     #{player.name}, your turn.
-    Choose the column (1-6) where you want your disk to go:
+    Choose the column (1-7) where you want your disk to go:
     TEXT
   end
 

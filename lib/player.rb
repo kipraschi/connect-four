@@ -10,6 +10,7 @@ class Player
     loop do
       input = gets.chomp
       return input.to_i if valid_input?(input)
+      announce_invalid_input
     end
   end
 
@@ -17,5 +18,9 @@ class Player
   
   def valid_input?(input)
     input.match?(/\A[1-7]\z/)
+  end
+
+  def announce_invalid_input
+    puts "Invalid input, please choose a column number 1-7"
   end
 end
