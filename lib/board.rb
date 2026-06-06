@@ -8,7 +8,7 @@ class Board
   end
 
   def display
-    @grid.transpose.map { |row| row.join(' ') }
+    @grid.transpose.map { |row| row.join(' ') }.join("\n")
   end
 
   def update(column_index, symbol)

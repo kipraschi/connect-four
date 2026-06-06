@@ -8,7 +8,7 @@ RSpec.describe Board do
   describe '#display' do
     context 'when the grid is empty' do
       it 'returns an empty grid formated to printing to the cli' do
-        empty_board = Array.new(6) {Array.new(7, empty_sym).join(' ')}
+        empty_board = Array.new(6) {Array.new(7, empty_sym).join(' ')}.join("\n")
         expect(board.display).to eq(empty_board)
       end
     end
