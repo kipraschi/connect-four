@@ -3,6 +3,8 @@ class Player
     @marker = marker
   end
 
+  attr_reader :marker
+
   def choose_column
     loop do
       input = gets.chomp
