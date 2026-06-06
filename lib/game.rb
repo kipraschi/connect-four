@@ -59,18 +59,26 @@ class Game
   end
 
   def start_message
-    "Welcome to the game of Connect Four\n
-    Take turns dropping your marker into one of the columns.\n 
-    The first player to connect four in a row (horizontally, vertically or diagonally) wins.\n"
+    <<~TEXT
+    
+    Welcome to the game of Connect Four
+
+    Take turns dropping your marker into one of the columns.
+    The first player to connect four in a row (horizontally, vertically or diagonally) wins.
+
+    TEXT
   end
 
   def turn_message(player)
-    "#{player.name}, your turn.\n
-    Choose the column (1-6) where you want your disk to go:"
+    <<~TEXT
+
+    #{player.name}, your turn.
+    Choose the column (1-6) where you want your disk to go:
+    TEXT
   end
 
   def input_error
-    'This column is not available. Choose another one:'
+    "\nThis column is not available. Choose another one: "
   end
 
   def draw_message
