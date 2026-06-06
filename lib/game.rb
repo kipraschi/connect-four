@@ -15,28 +15,37 @@ class Game
     
     until game_over?
       @players.each do |player|
-        announce(:turn, player)
-        column_index = player.choose_column - 1
-        until @board.valid_move?(column_index)
-          announce(:column_full)
-          column_index = player.choose_column - 1
-        end
-
-        @board.update(column_index, player.marker)
-        puts @board.display
-
-        if game_over?
-          @board.draw? ? announce(:draw, player) : announce(:winner, player)
-          break
-        end
+        play_turn(player)
+        break if game_over?
       end
     end
   end
 
   private
 
+  def play_turn(player)
+    announce(:turn, player)
+    column_index = choose_valid_column(player)
+    @board.update(column_index, player.marker)
+    puts @board.display
+    announce_game_result(player) if game_over?
+  end
+
+  def choose_valid_column(player)
+    column_index = player.choose_column - 1
+      until @board.valid_move?(column_index)
+        announce(:column_full)
+        column_index = player.choose_column - 1
+      end
+    column_index
+  end
+
   def game_over?
     @board.four_connected? || @board.draw?
+  end
+
+  def announce_game_result(player)
+     @board.draw? ? announce(:draw, player) : announce(:winner, player)
   end
 
   def announce(message, player = nil)

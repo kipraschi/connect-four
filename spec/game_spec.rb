@@ -10,7 +10,7 @@ RSpec.describe Game do
     context 'until the game is over' do
       before do
         allow(game).to receive(:announce).with(any_args)
-        allow(game).to receive(:game_over?).and_return(false, false, true)
+        allow(game).to receive(:game_over?).and_return(false, false, false, true)
         allow(player1).to receive(:choose_column).and_return(4)
         allow(player2).to receive(:choose_column).and_return(3)
         allow(board).to receive(:update)
