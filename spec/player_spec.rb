@@ -1,7 +1,7 @@
 require_relative '../lib/player'
 
 RSpec.describe Player do
-  let(:player) {described_class.new('◉')}
+  let(:player) {described_class.new('◉', 'Player')}
   describe '#choose_column' do
     context 'when provided with a valid input' do
       it 'returns the entered number' do
