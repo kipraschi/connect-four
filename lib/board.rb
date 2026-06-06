@@ -1,6 +1,6 @@
 class Board
   attr_reader :grid
-  def initialize (height = 6, width = 7)
+  def initialize(height = 6, width = 7)
     @height = height
     @width = width
     @empty_cell = '◯'
@@ -73,8 +73,7 @@ class Board
         next if cell == @empty_cell
         if row_index <=2
           return true if (1..3).all? { |offset| cell == @grid[column_index + offset][row_index + offset] }
-        end
-        if row_index >=3
+        elsif row_index >=3
           return true if (1..3).all? { |offset| cell == @grid[column_index + offset][row_index - offset] }
         end
       end
