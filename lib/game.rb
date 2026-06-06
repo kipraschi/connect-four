@@ -2,7 +2,7 @@ require_relative 'board'
 require_relative 'player'
 
 class Game
-  def initialize(player1 = Player.new('◉', 'Player 1'), player2 = Player.new('◎', 'Player 1'), board = Board.new)
+  def initialize(player1 = Player.new('◉', 'Player 1'), player2 = Player.new('◎', 'Player 2'), board = Board.new)
     @player1 = player1
     @player2 = player2
     @players = [@player1, @player2]
