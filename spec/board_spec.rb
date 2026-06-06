@@ -71,7 +71,7 @@ RSpec.describe Board do
     context 'when the grid has four same symbols on the first diagonal' do
       it 'returns true' do
         board.grid.each_with_index do |column, column_index|
-          board.grid[column_index][column_index + 1] = sym1 unless column_index > 3
+          board.grid[column_index][column_index] = sym1 unless column_index > 3
         end
         expect(board.four_connected?).to be(true)
       end
@@ -80,9 +80,7 @@ RSpec.describe Board do
     context 'when the grid has four same symbols on the second diagonal' do
       it 'returns true' do
         board.grid.each_with_index do |column, column_index|
-          offset = 1
-            board.grid[column_index][-column_index - offset] = sym1 unless column_index > 5
-          offset += 1
+          board.grid[column_index][-column_index - 1] = sym1 unless column_index > 3
         end
         expect(board.four_connected?).to be(true)
       end
