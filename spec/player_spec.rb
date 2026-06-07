@@ -1,7 +1,8 @@
 require_relative '../lib/player'
 
 RSpec.describe Player do
-  let(:player) {described_class.new('◉', 'Player')}
+  let(:display) {double('display')}
+  let(:player) {described_class.new('◉', 'Player', display)}
   describe '#choose_column' do
     context 'when provided with a valid input' do
       it 'returns the entered number' do
@@ -9,13 +10,14 @@ RSpec.describe Player do
         expect(player.choose_column).to eq(3)
       end
     end
-
+    
     context 'when provided with an invalid input' do
       before do
-        allow(player).to receive(:announce_invalid_input)
+        allow(display).to receive(:announce).with(any_args)
       end
       it 'loops until input is valid' do
         allow(player).to receive(:gets).and_return('a','?','4')
+
         expect(player).to receive(:gets).exactly(3).times
         expect(player.choose_column).to eq(4)
       end

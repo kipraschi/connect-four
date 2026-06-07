@@ -5,12 +5,13 @@ RSpec.describe Game do
     let(:player1) {double('player1', marker: '◉')}
     let(:player2) {double('player2', marker: '◎')}
     let(:board) {double('board')}
-    let(:game) {described_class.new(player1, player2, board)}
+    let(:display) {double('display')}
+    let(:game) {described_class.new(player1, player2, board, display)}
 
     context 'until the game is over' do
       before do
-        allow(game).to receive(:announce).with(any_args)
-        allow(game).to receive(:puts)
+        allow(display).to receive(:announce).with(any_args)
+        allow(display).to receive(:render).with(any_args)
         allow(game).to receive(:game_over?).and_return(false, false, false, true)
         allow(player1).to receive(:choose_column).and_return(4)
         allow(player2).to receive(:choose_column).and_return(3)
@@ -36,8 +37,8 @@ RSpec.describe Game do
 
     context 'when one of the selected columns is not available' do
       before do
-        allow(game).to receive(:announce).with(any_args)
-        allow(game).to receive(:puts)
+        allow(display).to receive(:announce).with(any_args)
+        allow(display).to receive(:render).with(any_args)
         allow(game).to receive(:game_over?).and_return(false, true)
         allow(player1).to receive(:choose_column).and_return(8, 3)
         allow(board).to receive(:update)

@@ -1,7 +1,8 @@
 class Player
-  def initialize(marker, name)
+  def initialize(marker, name, display)
     @marker = marker
     @name = name
+    @display = display
   end
 
   attr_reader :marker, :name
@@ -10,7 +11,7 @@ class Player
     loop do
       input = gets.chomp
       return input.to_i if valid_input?(input)
-      announce_invalid_input
+      @display.announce(:invalid_input)
     end
   end
 
@@ -18,9 +19,5 @@ class Player
   
   def valid_input?(input)
     input.match?(/\A[1-7]\z/)
-  end
-
-  def announce_invalid_input
-    puts "Invalid input, please choose a column number 1-7"
   end
 end
