@@ -1,4 +1,4 @@
-module CLIDisplay
+module CLI
   def self.announce(message, player = nil)
     case message
       when :game_start then puts start_message
@@ -12,6 +12,10 @@ module CLIDisplay
   
   def self.render(string)
     puts string
+  end
+
+  def self.get_input
+    gets.chomp
   end
 
   private
@@ -50,5 +54,4 @@ module CLIDisplay
   def self.input_error
     "Invalid input, please choose a column number 1-7: "
   end
-
 end

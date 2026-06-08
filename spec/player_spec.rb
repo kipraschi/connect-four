@@ -6,7 +6,7 @@ RSpec.describe Player do
   describe '#choose_column' do
     context 'when provided with a valid input' do
       it 'returns the entered number' do
-        allow(player).to receive(:gets).and_return('3')
+        allow(display).to receive(:get_input).and_return('3')
         expect(player.choose_column).to eq(3)
       end
     end
@@ -16,19 +16,19 @@ RSpec.describe Player do
         allow(display).to receive(:announce).with(any_args)
       end
       it 'loops until input is valid' do
-        allow(player).to receive(:gets).and_return('a','?','4')
+        allow(display).to receive(:get_input).and_return('a','?','4')
 
-        expect(player).to receive(:gets).exactly(3).times
+        expect(display).to receive(:get_input).exactly(3).times
         expect(player.choose_column).to eq(4)
       end
 
       it 'rejects out-of-range numbers' do
-        allow(player).to receive(:gets).and_return('0', '9', '7')
+        allow(display).to receive(:get_input).and_return('0', '9', '7')
         expect(player.choose_column).to eq(7)
       end
 
       it 'rejects multi-digit input' do
-        allow(player).to receive(:gets).and_return('11', '3')
+        allow(display).to receive(:get_input).and_return('11', '3')
         expect(player.choose_column).to eq(3)
       end
     end

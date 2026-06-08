@@ -1,9 +1,9 @@
 require_relative 'board'
 require_relative 'player'
-require_relative 'cli_display'
+require_relative 'cli'
 
 class Game
-  def initialize(player1 = Player.new('◉', 'Player 1', CLIDisplay), player2 = Player.new('◎', 'Player 2', CLIDisplay), board = Board.new, display = CLIDisplay)
+  def initialize(player1 = Player.new('◉', 'Player 1', CLI), player2 = Player.new('◎', 'Player 2', CLI), board = Board.new, display = CLI)
     @player1 = player1
     @player2 = player2
     @players = [@player1, @player2]

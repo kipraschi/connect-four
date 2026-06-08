@@ -9,7 +9,7 @@ class Player
 
   def choose_column
     loop do
-      input = gets.chomp
+      input = @display.get_input
       return input.to_i if valid_input?(input)
       @display.announce(:invalid_input)
     end
